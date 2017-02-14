@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>DJ无缝滚动</title>
+	<link rel="stylesheet" href="css/prism.css">
+	<script src="js/prism.js"></script>
+	<style>
+		*{margin:0;padding:0;}
+		img{display:block;border:none;}
+		h2{font-weight:normal;margin:10px 0;}
+		p{text-indent: 32px;margin-bottom: 10px;}
+		.wrap{max-width:1000px;margin:0 auto;}
+
+		.djcarouselwrap{position:relative;width:100%;overflow: hidden;}
+		.carouselhidden{height:auto;visibility: hidden;}
+		#djcarousel{position:absolute;top:0;left:0;width:100%;height:100%;}
+		#djcarousel a{display: block;}
+		#djcarousel div{position: absolute;width:100%;height:100%;}
+		.carouselbtbtn{position: absolute;bottom:0;width:100%;text-align: center;}
+		.carouselbtbtn span{display:inline-block;font-size: 0;padding:5px;border-radius:5px;margin:0 4px;background: #ccc;vertical-align: middle;}
+		.carouselbtbtn span.carouselactive{background: #00868B;}
+		.carousellrbtn{display: none;}
+		.carousellrbtn span{position: absolute;top:50%;width:30px;height:80px;margin-top:-40px;font-size:24px;color:#fff;line-height: 80px;text-align: center;background: rgba(0,0,0,.3);-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;-o-user-select: none;user-select: none;cursor: default;}
+		.carousellrbtn span:hover{background: rgba(0,0,0,.6);}
+		.carouselprev{left:0;}
+		.carouselnext{right:0;}
+
+		.djcarouselwrap1{position:relative;width:500px;margin:0 auto 200px;overflow: hidden;}
+		#djcarousel1{position:absolute;top:0;left:0;width:100%;height:100%;}
+		#djcarousel1 a{display: block;}
+		#djcarousel1 div{position: absolute;width:100%;height:100%;}
+	</style>
+</head>
+<body>
+<div class="djcarouselwrap">
+	<img class="carouselhidden" width="100%" src="images/gif.gif" alt="DJ">
+	<div id="djcarousel">
+		<div data-showed="0">
+			<a href="https://www.baidu.com/"><img width="100%" height="100%" data-src="images/a1.jpg" src="images/gif.gif" alt=""></a>
+		</div>
+		<div data-showed="0">
+			<a href=""><img width="100%" height="100%" data-src="images/a2.jpg" src="images/gif.gif" alt=""></a>
+		</div>
+		<div data-showed="0">
+			<a href=""><img width="100%" height="100%" data-src="images/a3.jpg" src="images/gif.gif" alt=""></a>
+		</div>
+		<div data-showed="0">
+			<a href=""><img width="100%" height="100%" data-src="images/a4.jpg" src="images/gif.gif" alt=""></a>
+		</div>
+		<div data-showed="0">
+			<a href=""><img width="100%" height="100%" data-src="images/a5.jpg" src="images/gif.gif" alt=""></a>
+		</div>
+	</div>
+	<div class="carouselbtbtn"></div>
+	<div class="carousellrbtn">
+		<span class="carouselprev" data-dir="-1"><</span>
+		<span class="carouselnext" data-dir="1">></span>
+	</div>
+</div>
+<div class="wrap">
+<h2>自适应轮播图</h2>
+<p>原则：尽量减少DOM操作，比如自适应，什么宽度高度交给浏览器去做嘛，为什么要用js去操控它们呢？容器内的第一个img标签是必要的，需要放一个初始显示的loading图片，比如加载中gif图，宽高比例和轮播图片一样就行</p>
+<p>调用方法：</p>
+<pre><code class="language-js">
+var oD = document.getElementById('djcarousel');
+DJ.Carousel({
+	element:oD,
+	// 是否开启底部按钮
+	openBtn:true,
+	// 是否开启左右按钮
+	openlrBtn:true,
+	// 移入显示左右按钮，需要开启左右按钮，设置请用css先隐藏
+	overShowlr:true,
+	// 移入暂停轮播
+	overStop:true,
+	// 动画过渡时间
+	duration:400,
+	// 自动播放间隔时间
+	autoPlayTime:5000,
+	// 回调
+	callBack:function(i, nowindex, oldindex) {
+		// console.log(i, nowindex, oldindex);
+		// i，真实索引
+		// nowindex，包含所有节点的当前显示的索引
+		// oldindex，包含所有节点的上一个显示的索引
+	}
+});
+</code></pre>
+<h2>固定宽度的调用是一样的</h2>
+</div>
+
+<div class="djcarouselwrap1">
+	<img class="carouselhidden" width="100%" src="images/gif.gif" alt="DJ">
+	<div id="djcarousel1">
+		<div data-showed="0">
+			<a href="https://www.baidu.com/"><img width="100%" height="100%" data-src="images/a1.jpg" src="images/gif.gif" alt=""></a>
+		</div>
+		<div data-showed="0">
+			<a href=""><img width="100%" height="100%" data-src="images/a2.jpg" src="images/gif.gif" alt=""></a>
+		</div>
+		<div data-showed="0">
+			<a href=""><img width="100%" height="100%" data-src="images/a3.jpg" src="images/gif.gif" alt=""></a>
+		</div>
+	</div>
+	<div class="carouselbtbtn"></div>
+	<div class="carousellrbtn">
+		<span class="carouselprev" data-dir="-1"><</span>
+		<span class="carouselnext" data-dir="1">></span>
+	</div>
+</div>
+<script src="js/Djcss3Carousel.min.js"></script>
+<script>
+	var oD = document.getElementById('djcarousel'),
+		oD1 = document.getElementById('djcarousel1');
+	DJ.Carousel({
+		element:oD,
+		// 是否开启底部按钮
+		openBtn:true,
+		// 是否开启左右按钮
+		openlrBtn:true,
+		// 移入显示左右按钮
+		overShowlr:true,
+		// 移入暂停轮播
+		overStop:true,
+		// 动画过渡时间
+		duration:400,
+		// 自动播放间隔时间
+		autoPlayTime:5000,
+		// 回调
+		callBack:function(i, nowindex, oldindex) {
+			// console.log(i, nowindex, oldindex);
+			// i，真实索引
+			// nowindex，包含所有节点的当前显示的索引
+			// oldindex，包含所有节点的上一个显示的索引
+		}
+	});
+
+	DJ.Carousel({
+		element:oD1,
+		// 是否开启底部按钮
+		openBtn:true,
+		// 是否开启左右按钮
+		openlrBtn:true,
+		// 移入显示左右按钮
+		overShowlr:true,
+		// 移入暂停轮播
+		overStop:true,
+		// 动画过渡时间
+		duration:400,
+		// 自动播放间隔时间
+		autoPlayTime:3000,
+		// 回调
+		callBack:function(i, nowindex, oldindex) {
+			// console.log(i, nowindex, oldindex);
+			// i，真实索引
+			// nowindex，包含所有节点的当前显示的索引
+			// oldindex，包含所有节点的上一个显示的索引
+		}
+	});
+</script>
+</body>
+</html>
